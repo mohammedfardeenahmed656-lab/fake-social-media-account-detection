@@ -563,6 +563,23 @@ function initBenchmarkStudio() {
   if (btnExport) btnExport.addEventListener('click', exportBenchmarkCsv);
 
   const btnScan = document.getElementById('btnScanAllBatch');
+
+  // Custom CSV Upload Integration
+  const btnUpload = document.getElementById('btnUploadCsv');
+  const fileInput = document.getElementById('csvFileInput');
+  if (btnUpload && fileInput) {
+    btnUpload.addEventListener('click', () => fileInput.click());
+    fileInput.addEventListener('change', (e) => {
+      const file = e.target.files[0];
+      if (!file) return;
+      const reader = new FileReader();
+      reader.onload = (evt) => {
+        parseAndLoadCustomCsv(evt.target.result);
+      };
+      reader.readAsText(file);
+    });
+  }
+
   if (btnScan) btnScan.addEventListener('click', evaluateBenchmarkBatch);
 }
 
@@ -1142,4 +1159,52 @@ function openReportModal() {
 function closeReportModal() {
   const overlay = document.getElementById('reportModalOverlay');
   if (overlay) overlay.classList.remove('active');
+}
+
+
+function parseAndLoadCustomCsv(csvText) {
+  try {
+    const lines = csvText.split(/\r?\n/).filter(l => l.trim().length > 0);
+    if (lines.length < 2) return;
+    const headers = lines[0].split(',').map(h => h.trim().toLowerCase());
+    const newRecords = [];
+
+    for (let i = 1; i < lines.length; i++) {
+      const parts = lines[i].split(',').map(p => p.trim());
+      if (parts.length < headers.length) continue;
+      const row = {};
+      headers.forEach((h, idx) => {
+        row[h] = parts[idx];
+      });
+
+      newRecords.push({
+        id: row.id || `custom_${i}`,
+        handle: row.handle || `@account_${i}`,
+        platform: row.platform || 'twitter',
+        followers_count: Number(row.followers_count || 100),
+        following_count: Number(row.following_count || 100),
+        posts_count: Number(row.posts_count || 50),
+        account_age_days: Number(row.account_age_days || 30),
+        has_default_avatar: row.has_default_avatar === '1' || row.has_default_avatar === 'true',
+        has_bio: row.has_bio === '1' || row.has_bio === 'true',
+        avg_posts_per_day: Number(row.avg_posts_per_day || 1),
+        retweet_ratio: Number(row.retweet_ratio || 0.2),
+        inter_arrival_variance: Number(row.inter_arrival_variance || 0.5),
+        circadian_entropy: Number(row.circadian_entropy || 0.5),
+        lexical_diversity: Number(row.lexical_diversity || 0.7),
+        digits_in_username: Number(row.digits_in_username || 0),
+        ground_truth: (row.ground_truth || 'fake').toLowerCase() === 'fake' ? 'fake' : 'human',
+        bot_type: row.bot_type || 'custom'
+      });
+    }
+
+    if (newRecords.length > 0) {
+      STATE.benchmarkData = newRecords;
+      evaluateBenchmarkBatch();
+      alert(`Successfully ingested and evaluated ${newRecords.length} records from uploaded CSV!`);
+    }
+  } catch (err) {
+    console.error('Error parsing CSV:', err);
+    alert('Failed to parse uploaded CSV. Please check formatting.');
+  }
 }
