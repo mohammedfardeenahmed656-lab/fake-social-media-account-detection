@@ -1,0 +1,825 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CyberSentry AI — Fake Social Media Account Detection Platform</title>
+  <meta name="description" content="Analytical and machine learning platform for automated detection of fake social media accounts, sybil botnets, astroturfing rings, and impersonation profiles.">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div class="cyber-grid-bg"></div>
+
+  <!-- Main Navigation -->
+  <header class="navbar">
+    <a href="#" class="brand-container" id="brandLogo">
+      <div class="brand-icon-wrapper">🛡️</div>
+      <div class="brand-text">
+        <h1>CyberSentry AI</h1>
+        <div class="brand-subtitle">Fake Account Detection Platform</div>
+      </div>
+    </a>
+
+    <!-- View Switcher Tabs -->
+    <nav class="nav-tabs" role="tablist">
+      <button class="nav-tab-btn active" data-tab="auditor" id="tabAuditor">
+        <span>🔍</span> Account Auditor
+      </button>
+      <button class="nav-tab-btn" data-tab="benchmark" id="tabBenchmark">
+        <span>📊</span> Batch Studio
+      </button>
+      <button class="nav-tab-btn" data-tab="network" id="tabNetwork">
+        <span>🕸️</span> Sybil Botnet Graph
+      </button>
+      <button class="nav-tab-btn" data-tab="tuner" id="tabTuner">
+        <span>⚙️</span> Model Lab
+      </button>
+      <button class="nav-tab-btn" data-tab="methodology" id="tabMethodology">
+        <span>📑</span> Whitepaper
+      </button>
+    </nav>
+
+    <!-- Nav Actions -->
+    <div class="nav-actions">
+      <div class="live-engine-badge">
+        <span class="pulse-dot"></span>
+        <span>Engine Active v2.4</span>
+      </div>
+      <button class="btn-secondary" id="btnOpenReportModal">
+        <span>📄</span> Export Report
+      </button>
+      <a href="https://github.com/mohammedfardeenahmed656-lab/fake-social-media-account-detection" target="_blank" rel="noopener" class="btn-github">
+        <svg height="16" width="16" viewBox="0 0 16 16" fill="currentColor">
+          <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013 8.013 0 0016 8c0-4.42-3.58-8-8-8z"/>
+        </svg>
+        <span>GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Container -->
+  <main class="main-container">
+
+    <!-- ====================================================================
+         TAB 1: ACCOUNT FORENSIC AUDITOR
+         ==================================================================== -->
+    <section class="tab-pane active" id="pane-auditor">
+      <!-- Hero Headline -->
+      <div class="section-hero">
+        <div class="section-hero-title">
+          <h2>🔍 Account Forensic Auditor</h2>
+          <p>Multi-dimensional analytical telemetry analyzer evaluating follower asymmetry, circadian entropy, cron-like inter-arrival timing, and linguistic repetition.</p>
+        </div>
+      </div>
+
+      <!-- Preset Target Profiles Bar -->
+      <div class="preset-selector-bar">
+        <div class="preset-header">
+          <span>Target Profiles (Pre-Calibrated Case Studies)</span>
+          <span style="font-size:0.75rem; color:var(--accent-cyan);">Click any profile to audit</span>
+        </div>
+        <div class="preset-chips-scroll" id="presetChipsContainer">
+          <!-- Dynamically populated from PRESET_ACCOUNTS -->
+        </div>
+      </div>
+
+      <!-- Auditor Grid Layout -->
+      <div class="auditor-grid">
+        <!-- Left: Input & Target Metadata Controls -->
+        <div class="cyber-card">
+          <div class="card-title">
+            <span>⚙️ Account Parameters</span>
+            <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">MANUAL / API</span>
+          </div>
+
+          <form id="auditForm">
+            <div class="form-group">
+              <label class="form-label" for="inputHandle">Username / Handle</label>
+              <input type="text" id="inputHandle" class="form-input" value="@crypto_pump_bot99" placeholder="@username">
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inputName">Display Name</label>
+              <input type="text" id="inputName" class="form-input" value="ETH Airdrop Claim 🎁 2026">
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="inputFollowers">Followers</label>
+                <input type="number" id="inputFollowers" class="form-input" value="14" min="0">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="inputFollowing">Following</label>
+                <input type="number" id="inputFollowing" class="form-input" value="4890" min="0">
+              </div>
+            </div>
+
+            <div class="form-row">
+              <div class="form-group">
+                <label class="form-label" for="inputAge">Account Age (Days)</label>
+                <input type="number" id="inputAge" class="form-input" value="9" min="1">
+              </div>
+              <div class="form-group">
+                <label class="form-label" for="inputPostsDay">Avg Posts / Day</label>
+                <input type="number" id="inputPostsDay" class="form-input" value="142.6" step="0.1" min="0">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inputBio">Bio Description</label>
+              <textarea id="inputBio" class="form-input" rows="2" style="resize:vertical;">Official Smart Contract Airdrop claim portal! Drop your wallet in DMs for instant 2.5 ETH rewards! Click link below 👇</textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="form-label" for="inputUrl">Profile URL</label>
+              <input type="text" id="inputUrl" class="form-input" value="https://bit.ly/eth-claim-free99">
+            </div>
+
+            <div class="form-row" style="margin-bottom:1.25rem;">
+              <label class="form-check">
+                <input type="checkbox" id="checkDefaultAvatar">
+                <span>Default Avatar</span>
+              </label>
+              <label class="form-check">
+                <input type="checkbox" id="checkVerified">
+                <span>Verified Badge</span>
+              </label>
+            </div>
+
+            <button type="submit" class="btn-primary" id="btnRunAudit">
+              <span>⚡</span> Run Forensic Audit
+            </button>
+          </form>
+        </div>
+
+        <!-- Right: Detection Engine Results -->
+        <div class="results-pane">
+          <!-- Verdict Banner with Circular Gauge -->
+          <div class="verdict-banner danger" id="verdictBanner">
+            <div class="gauge-container">
+              <svg class="gauge-svg" viewBox="0 0 150 150">
+                <circle class="gauge-bg-circle" cx="75" cy="75" r="65"></circle>
+                <circle class="gauge-val-circle" id="gaugeCircle" cx="75" cy="75" r="65"></circle>
+              </svg>
+              <div class="gauge-inner-text">
+                <div class="gauge-percent" id="gaugePercentText" style="color:var(--accent-crimson);">97.4%</div>
+                <div class="gauge-label">Bot Probability</div>
+              </div>
+            </div>
+
+            <div class="verdict-details">
+              <div class="verdict-meta-badges">
+                <span class="verdict-badge badge-danger" id="verdictBadge">🚨 High Risk Bot</span>
+                <span class="verdict-badge" style="background:rgba(255,255,255,0.06); color:var(--text-secondary);" id="verdictPlatform">Twitter / X</span>
+                <span class="verdict-badge" style="background:rgba(255,255,255,0.06); color:var(--text-secondary);" id="verdictArchetype">Spam & Phishing</span>
+              </div>
+              <h3 id="verdictTitle">Automated Sybil / Spam Bot Detected</h3>
+              <p class="verdict-narrative" id="verdictNarrative">
+                This account exhibits severe bot characteristics: extreme follower/following asymmetry (14:4890), excessive posting frequency (142 posts/day), absence of circadian sleep rhythm, and clockwork temporal intervals.
+              </p>
+            </div>
+
+            <div class="verdict-actions">
+              <button class="btn-secondary" id="btnQuickExport">
+                <span>📥</span> Save Audit
+              </button>
+            </div>
+          </div>
+
+          <!-- Feature Vectors Breakdown & SHAP Attribution Grid -->
+          <div class="features-split-grid">
+            <!-- Left: Radar / Vector Telemetry -->
+            <div class="cyber-card">
+              <div class="card-title">
+                <span>📊 Forensic Feature Vectors</span>
+                <span style="font-size:0.72rem; color:var(--accent-cyan); font-family:var(--font-mono);">NORMALIZED [0-1]</span>
+              </div>
+
+              <div class="vector-bars-list">
+                <div class="vector-item">
+                  <div class="vector-header">
+                    <span class="vector-name">Follower Reputation Score</span>
+                    <span class="vector-val" id="valReputation">0.003 (Critical)</span>
+                  </div>
+                  <div class="vector-track">
+                    <div class="vector-fill" id="barReputation" style="width: 3%; background:var(--accent-crimson);"></div>
+                  </div>
+                </div>
+
+                <div class="vector-item">
+                  <div class="vector-header">
+                    <span class="vector-name">Post Frequency / Velocity</span>
+                    <span class="vector-val" id="valVelocity">142.6 posts/day</span>
+                  </div>
+                  <div class="vector-track">
+                    <div class="vector-fill" id="barVelocity" style="width: 95%; background:var(--accent-crimson);"></div>
+                  </div>
+                </div>
+
+                <div class="vector-item">
+                  <div class="vector-header">
+                    <span class="vector-name">Temporal Uniformity (Cron Indicator)</span>
+                    <span class="vector-val" id="valTemporal">0.04 (Clockwork)</span>
+                  </div>
+                  <div class="vector-track">
+                    <div class="vector-fill" id="barTemporal" style="width: 96%; background:var(--accent-crimson);"></div>
+                  </div>
+                </div>
+
+                <div class="vector-item">
+                  <div class="vector-header">
+                    <span class="vector-name">Circadian Sleep Entropy (24/7 Activity)</span>
+                    <span class="vector-val" id="valCircadian">0.98 (Non-Stop)</span>
+                  </div>
+                  <div class="vector-track">
+                    <div class="vector-fill" id="barCircadian" style="width: 98%; background:var(--accent-amber);"></div>
+                  </div>
+                </div>
+
+                <div class="vector-item">
+                  <div class="vector-header">
+                    <span class="vector-name">Lexical Repetition (Type-Token Ratio)</span>
+                    <span class="vector-val" id="valLexical">0.18 (Spam Template)</span>
+                  </div>
+                  <div class="vector-track">
+                    <div class="vector-fill" id="barLexical" style="width: 18%; background:var(--accent-amber);"></div>
+                  </div>
+                </div>
+
+                <div class="vector-item">
+                  <div class="vector-header">
+                    <span class="vector-name">Username Shannon Entropy</span>
+                    <span class="vector-val" id="valEntropy">3.12 bits (Alphanumeric)</span>
+                  </div>
+                  <div class="vector-track">
+                    <div class="vector-fill" id="barEntropy" style="width: 72%; background:var(--accent-cyan);"></div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Right: SHAP Explainability Attribution Factors -->
+            <div class="cyber-card">
+              <div class="card-title">
+                <span>🧠 Explainable AI (SHAP Attribution)</span>
+                <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">LOCAL IMPACT</span>
+              </div>
+
+              <div class="explain-list" id="explainabilityList">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+
+          <!-- Bottom: Circadian 24-Hour Rhythm & Timeline Analysis -->
+          <div class="cyber-card">
+            <div class="card-title">
+              <span>⏰ 24-Hour Circadian Activity Distribution</span>
+              <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">UTC POSTING PATTERN</span>
+            </div>
+
+            <div class="circadian-chart-box">
+              <div class="histogram-bars" id="circadianHistogram">
+                <!-- 24 hourly bars rendered dynamically -->
+              </div>
+              <div style="display:flex; justify-content:space-between; margin-top:0.75rem; font-size:0.75rem; color:var(--text-muted);">
+                <span>00:00 (Midnight)</span>
+                <span>06:00 (Dawn)</span>
+                <span>12:00 (Noon)</span>
+                <span>18:00 (Dusk)</span>
+                <span>23:59</span>
+              </div>
+            </div>
+
+            <!-- Sample Post Ledger -->
+            <div style="margin-top:1.5rem;">
+              <div style="font-size:0.84rem; font-weight:600; margin-bottom:0.75rem; color:var(--text-secondary);">
+                Sample Posts Telemetry Stream
+              </div>
+              <div id="postsTelemetryList" style="display:flex; flex-direction:column; gap:0.6rem;">
+                <!-- Dynamically populated -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 2: BATCH BENCHMARK EVALUATION STUDIO
+         ==================================================================== -->
+    <section class="tab-pane" id="pane-benchmark">
+      <div class="section-hero">
+        <div class="section-hero-title">
+          <h2>📊 Batch Benchmark Studio</h2>
+          <p>Comprehensive machine learning model validation across 120+ synthetic & empirical social media account records based on Cresci-2017 & Botometer protocols.</p>
+        </div>
+        <div style="display:flex; gap:0.75rem;">
+          <button class="btn-secondary" id="btnExportBenchmarkCsv">
+            <span>💾</span> Export Results (.CSV)
+          </button>
+          <button class="btn-primary" style="width:auto; padding:0.55rem 1rem;" id="btnScanAllBatch">
+            <span>⚡</span> Re-Evaluate Dataset
+          </button>
+        </div>
+      </div>
+
+      <!-- Stat Metrics Cards -->
+      <div class="stats-cards-grid">
+        <div class="stat-card">
+          <div class="stat-header">
+            <span>Dataset Cohort</span>
+            <span>📁</span>
+          </div>
+          <div class="stat-num" id="statTotalAccounts">120</div>
+          <div class="stat-sub">Balanced Bot / Human Baselines</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span>Model Accuracy</span>
+            <span>🎯</span>
+          </div>
+          <div class="stat-num" id="statAccuracy" style="color:var(--accent-emerald);">98.3%</div>
+          <div class="stat-sub">Overall Correct Classifications</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span>Precision Rate</span>
+            <span>🔬</span>
+          </div>
+          <div class="stat-num" id="statPrecision">98.3%</div>
+          <div class="stat-sub">Low False Positive Rate</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span>Recall / Detection</span>
+            <span>🛡️</span>
+          </div>
+          <div class="stat-num" id="statRecall">100.0%</div>
+          <div class="stat-sub">Bot Identification Recall</div>
+        </div>
+
+        <div class="stat-card">
+          <div class="stat-header">
+            <span>F1-Score</span>
+            <span>⚡</span>
+          </div>
+          <div class="stat-num" id="statF1">0.991</div>
+          <div class="stat-sub">Harmonic Mean Metric</div>
+        </div>
+      </div>
+
+      <!-- Confusion Matrix & ROC Performance -->
+      <div class="eval-split-grid">
+        <!-- 2x2 Confusion Matrix -->
+        <div class="cyber-card">
+          <div class="card-title">
+            <span>🧮 Confusion Matrix</span>
+            <span style="font-size:0.72rem; color:var(--text-muted); font-family:var(--font-mono);">BINARY (BOT vs HUMAN)</span>
+          </div>
+
+          <div class="confusion-matrix-table">
+            <div class="matrix-cell tp">
+              <span class="matrix-val" id="matrixTP" style="color:var(--accent-crimson);">60</span>
+              <span class="matrix-title">True Positive (TP)</span>
+              <div class="matrix-desc">Bots correctly flagged</div>
+            </div>
+
+            <div class="matrix-cell fp">
+              <span class="matrix-val" id="matrixFP" style="color:var(--accent-amber);">1</span>
+              <span class="matrix-title">False Positive (FP)</span>
+              <div class="matrix-desc">Humans flagged as bot</div>
+            </div>
+
+            <div class="matrix-cell fn">
+              <span class="matrix-val" id="matrixFN" style="color:var(--accent-amber);">0</span>
+              <span class="matrix-title">False Negative (FN)</span>
+              <div class="matrix-desc">Bots classified as human</div>
+            </div>
+
+            <div class="matrix-cell tn">
+              <span class="matrix-val" id="matrixTN" style="color:var(--accent-emerald);">59</span>
+              <span class="matrix-title">True Negative (TN)</span>
+              <div class="matrix-desc">Humans correctly cleared</div>
+            </div>
+          </div>
+
+          <div style="margin-top:1.25rem; font-size:0.78rem; color:var(--text-secondary); line-height:1.5;">
+            * Optimal cutoff configured at <strong>50% Risk Threshold</strong>. Minimizes false positives to prevent suspending legitimate users.
+          </div>
+        </div>
+
+        <!-- Distribution & Cohort Insights -->
+        <div class="cyber-card">
+          <div class="card-title">
+            <span>📈 Risk Score Distribution Histogram</span>
+            <span style="font-size:0.72rem; color:var(--accent-cyan); font-family:var(--font-mono);">BIMODAL SEPARATION</span>
+          </div>
+          <div style="margin-bottom:1rem; font-size:0.84rem; color:var(--text-secondary);">
+            Clear bimodal separation illustrates high model discriminative power between legitimate organic users (left peak &lt; 20%) and automated bots (right peak &gt; 80%).
+          </div>
+          <div class="circadian-chart-box" style="height:150px; display:flex; align-items:flex-end; gap:6px;" id="bimodalChart">
+            <!-- Rendered via JS -->
+          </div>
+          <div style="display:flex; justify-content:space-between; margin-top:0.5rem; font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">
+            <span>0% (Human)</span>
+            <span>25%</span>
+            <span>50% (Cutoff)</span>
+            <span>75%</span>
+            <span>100% (Bot)</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Dataset Filter & Interactive Table -->
+      <div class="cyber-card">
+        <div class="table-filter-bar">
+          <div class="card-title" style="margin-bottom:0;">
+            <span>📋 Benchmark Accounts Ledger</span>
+          </div>
+
+          <div class="filter-group">
+            <select id="filterPlatform" class="filter-select">
+              <option value="all">All Platforms</option>
+              <option value="twitter">Twitter / X</option>
+              <option value="instagram">Instagram</option>
+              <option value="linkedin">LinkedIn</option>
+            </select>
+
+            <select id="filterGroundTruth" class="filter-select">
+              <option value="all">All Types</option>
+              <option value="fake">Bots / Fake Only</option>
+              <option value="human">Humans Only</option>
+            </select>
+
+            <input type="text" id="filterSearch" class="form-input" style="width:200px; padding:0.4rem 0.75rem; font-size:0.82rem;" placeholder="Search handle...">
+          </div>
+        </div>
+
+        <div class="table-responsive">
+          <table class="cyber-table">
+            <thead>
+              <tr>
+                <th>Handle</th>
+                <th>Platform</th>
+                <th>Followers / Following</th>
+                <th>Age</th>
+                <th>Posts/Day</th>
+                <th>Ground Truth</th>
+                <th>Predicted Risk</th>
+                <th>Verdict</th>
+                <th>Action</th>
+              </tr>
+            </thead>
+            <tbody id="benchmarkTableBody">
+              <!-- Dynamically populated -->
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 3: SYBIL BOTNET & NETWORK TOPOLOGY GRAPH
+         ==================================================================== -->
+    <section class="tab-pane" id="pane-network">
+      <div class="section-hero">
+        <div class="section-hero-title">
+          <h2>🕸️ Sybil Botnet & Astroturfing Visualizer</h2>
+          <p>Interactive 2D physics-based network graph mapping follower-rings, coordinated astroturfing clusters, and malicious bridge nodes attempting infiltration.</p>
+        </div>
+      </div>
+
+      <div class="network-canvas-container">
+        <!-- Floating Canvas Controls -->
+        <div class="network-overlay-controls">
+          <button class="btn-secondary" id="btnTogglePhysics">
+            <span>⏸️</span> Pause Physics
+          </button>
+          <button class="btn-secondary" id="btnResetGraph">
+            <span>🔄</span> Reset Layout
+          </button>
+        </div>
+
+        <!-- Legend Panel -->
+        <div class="network-legend-panel">
+          <strong style="font-size:0.8rem; margin-bottom:0.2rem; display:block;">Cluster Topology</strong>
+          <div class="legend-item">
+            <span class="legend-node" style="background:var(--accent-crimson); box-shadow:0 0 6px var(--accent-crimson);"></span>
+            <span>Cluster Alpha: Crypto Spam Ring</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-node" style="background:#ff7b00; box-shadow:0 0 6px #ff7b00;"></span>
+            <span>Cluster Beta: Sybil Astroturf Ring</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-node" style="background:#ff00ea; box-shadow:0 0 6px #ff00ea;"></span>
+            <span>Cluster Gamma: Brand Phishers</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-node" style="background:var(--accent-cyan); box-shadow:0 0 6px var(--accent-cyan);"></span>
+            <span>Cluster Delta: Stanford / Tech Organic</span>
+          </div>
+          <div class="legend-item">
+            <span class="legend-node" style="background:var(--accent-amber); box-shadow:0 0 6px var(--accent-amber);"></span>
+            <span>Infiltration Sleeper Bridges</span>
+          </div>
+        </div>
+
+        <!-- Selected Node Inspector -->
+        <div class="network-node-inspector" id="nodeInspector">
+          <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted); margin-bottom:0.35rem;">
+            Node Telemetry
+          </div>
+          <h4 id="inspectHandle" style="font-size:1.05rem; margin-bottom:0.4rem; color:var(--accent-cyan);">
+            @crypto_pump_bot99
+          </h4>
+          <div id="inspectBadges" style="margin-bottom:0.75rem;">
+            <span class="verdict-badge badge-danger">High Risk Bot (97%)</span>
+          </div>
+          <div style="font-size:0.8rem; color:var(--text-secondary); line-height:1.5;" id="inspectDetails">
+            Node acts as a high-degree coordinated central hub for 6 worker airdrop amplification nodes.
+          </div>
+          <button class="btn-secondary" style="width:100%; margin-top:0.85rem;" id="btnInspectDeepAudit">
+            <span>🔍</span> Audit in Inspector
+          </button>
+        </div>
+
+        <!-- 2D Canvas Target -->
+        <canvas id="networkCanvas"></canvas>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 4: MODEL LABORATORY & TUNER
+         ==================================================================== -->
+    <section class="tab-pane" id="pane-tuner">
+      <div class="section-hero">
+        <div class="section-hero-title">
+          <h2>⚙️ Model Laboratory & Heuristic Tuner</h2>
+          <p>Calibrate feature weights and risk thresholds. Observe live changes to false-positive rates and test custom synthetic profiles in real time.</p>
+        </div>
+      </div>
+
+      <div class="lab-split-grid">
+        <!-- Left: Weight Sliders -->
+        <div class="cyber-card">
+          <div class="card-title">
+            <span>🎛️ Heuristic Risk Weights</span>
+            <button class="btn-secondary" style="padding:0.25rem 0.6rem; font-size:0.75rem;" id="btnResetWeights">Reset Defaults</button>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Posting Velocity Penalty Weight</span>
+              <strong id="valWeightVelocity" style="color:var(--accent-cyan);">22.0</strong>
+            </div>
+            <input type="range" id="sliderWeightVelocity" class="slider-track" min="5" max="40" step="1" value="22">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Clockwork Inter-Arrival Timing Weight</span>
+              <strong id="valWeightClockwork" style="color:var(--accent-cyan);">24.0</strong>
+            </div>
+            <input type="range" id="sliderWeightClockwork" class="slider-track" min="5" max="45" step="1" value="24">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Circadian Rhythm Absence Weight</span>
+              <strong id="valWeightCircadian" style="color:var(--accent-cyan);">16.0</strong>
+            </div>
+            <input type="range" id="sliderWeightCircadian" class="slider-track" min="5" max="35" step="1" value="16">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Reputation Asymmetry Weight</span>
+              <strong id="valWeightReputation" style="color:var(--accent-cyan);">18.0</strong>
+            </div>
+            <input type="range" id="sliderWeightReputation" class="slider-track" min="5" max="35" step="1" value="18">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Decision Threshold Cutoff (%)</span>
+              <strong id="valThreshold" style="color:var(--accent-amber);">50%</strong>
+            </div>
+            <input type="range" id="sliderThreshold" class="slider-track" min="20" max="80" step="1" value="50">
+          </div>
+
+          <div style="background:rgba(10,15,28,0.7); padding:1rem; border-radius:var(--radius-sm); border:1px solid var(--border-subtle); margin-top:1.5rem;">
+            <div style="font-size:0.8rem; color:var(--text-muted); text-transform:uppercase;">Real-time Impact on Benchmark:</div>
+            <div style="display:flex; justify-content:space-between; margin-top:0.4rem; font-size:0.92rem; font-weight:600;">
+              <span>Updated Accuracy: <span id="tunedAccuracy" style="color:var(--accent-emerald);">98.3%</span></span>
+              <span>False Positives: <span id="tunedFP" style="color:var(--accent-amber);">1</span></span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: Interactive Profile Simulator -->
+        <div class="cyber-card">
+          <div class="card-title">
+            <span>🧪 Custom Synthetic Profile Simulator</span>
+            <span style="font-size:0.72rem; color:var(--accent-emerald); font-family:var(--font-mono);">LIVE PREVIEW</span>
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Followers / Following Ratio</span>
+              <strong id="simValRatio">10 / 2500 (0.004)</strong>
+            </div>
+            <input type="range" id="simRatio" class="slider-track" min="0" max="100" value="4">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Posting Volume (Posts / Day)</span>
+              <strong id="simValPosts">120 posts/day</strong>
+            </div>
+            <input type="range" id="simPosts" class="slider-track" min="1" max="250" value="120">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Temporal Inter-Arrival Variance</span>
+              <strong id="simValVariance">0.05 (Cron Automation)</strong>
+            </div>
+            <input type="range" id="simVariance" class="slider-track" min="1" max="100" value="5">
+          </div>
+
+          <div class="slider-group">
+            <div class="slider-header">
+              <span>Circadian 24/7 Sleep Entropy</span>
+              <strong id="simValCircadian">0.92 (Continuous Activity)</strong>
+            </div>
+            <input type="range" id="simCircadian" class="slider-track" min="10" max="100" value="92">
+          </div>
+
+          <!-- Dynamic Output Card -->
+          <div style="background:linear-gradient(135deg, rgba(255,51,102,0.1), rgba(15,23,42,0.8)); border:1px solid rgba(255,51,102,0.3); border-radius:var(--radius-md); padding:1.25rem; margin-top:1.5rem; text-align:center;" id="simOutputBox">
+            <div style="font-size:0.75rem; text-transform:uppercase; color:var(--text-muted);">Simulated Result</div>
+            <div style="font-size:2.2rem; font-family:var(--font-main); font-weight:800; color:var(--accent-crimson); margin:0.25rem 0;" id="simRiskScore">94.8%</div>
+            <div style="font-size:0.9rem; font-weight:600; color:var(--accent-crimson);" id="simVerdict">🚨 High Risk Bot Classification</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ====================================================================
+         TAB 5: METHODOLOGY & ANALYTICAL WHITEPAPER
+         ==================================================================== -->
+    <section class="tab-pane" id="pane-methodology">
+      <div class="section-hero">
+        <div class="section-hero-title">
+          <h2>📑 Analytical Detection Methodology</h2>
+          <p>Scientific foundations, mathematical models, feature engineering taxonomy, and countermeasures against adversarial social media manipulation.</p>
+        </div>
+      </div>
+
+      <div class="cyber-card whitepaper-body">
+        <h3>1. Executive Overview & Problem Definition</h3>
+        <p>
+          Automated social media accounts ("bots"), sybil networks, and astroturfing campaigns distort public consensus, facilitate phishing scams, and degrade user trust across modern digital platforms. This project introduces a multi-tier analytical detection architecture combining static metadata indicators, non-stationary temporal Poisson dynamics, linguistic entropy, and graph topological metrics.
+        </p>
+
+        <h3>2. Mathematical Formulation of Detection Signals</h3>
+        
+        <p><strong>A. Follower-Following Reputation Index ($R$)</strong></p>
+        <p>
+          Legitimate human profiles cultivate bi-directional social graphs. Mass-following spam bots exhibit extreme asymmetry:
+        </p>
+        <div class="formula-card">
+          R = Followers / (Followers + Following + ε)
+          where R ∈ [0, 1]. R < 0.05 indicates acute asymmetric bot behavior.
+        </div>
+
+        <p><strong>B. Shannon Entropy of Alphanumeric Handles ($H(X)$)</strong></p>
+        <p>
+          Synthetic usernames generated via PRNG or batch scripts exhibit distinct character entropy relative to natural human phonetic phonemes:
+        </p>
+        <div class="formula-card">
+          H(X) = - Σ [ P(x_i) · log₂(P(x_i)) ]
+          where P(x_i) is the probability frequency of character x_i in handle string X.
+        </div>
+
+        <p><strong>C. Inter-Arrival Time Variance (Poisson Process Analysis)</strong></p>
+        <p>
+          Organic human interactions are modeled by bursty Pareto or non-homogeneous Poisson processes with high inter-arrival interval variance $\sigma^2(\Delta t)$. Conversely, automated cron scripts emit events at near-zero variance intervals ($\Delta t \approx \text{const}$):
+        </p>
+        <div class="formula-card">
+          σ²(Δt) = (1 / (N - 1)) · Σ (Δt_i - μ_Δt)²
+          Clockwork threshold: σ²(Δt) < 0.15 triggers automated scheduling penalty.
+        </div>
+
+        <p><strong>D. Circadian Sleep Rhythm Entropy</strong></p>
+        <p>
+          Human biological circadian rhythms dictate 6–8 hour periods of near-zero posting activity. The circadian entropy metric measures the uniform dispersion of events across 24 hourly buckets:
+        </p>
+        <div class="formula-card">
+          CircadianEntropy = - (1 / log₂(24)) · Σ [ p_h · log₂(p_h) ]   for h ∈ [0, 23]
+          Continuous 24/7 posting yields CircadianEntropy → 1.0 (Automated Farm).
+        </div>
+
+        <h3>3. Explainable AI (SHAP-Inspired Local Attribution)</h3>
+        <p>
+          To maintain transparency for trust and safety operators, the decision engine computes linear additive feature attributions:
+        </p>
+        <div class="formula-card">
+          g(z') = φ₀ + Σ φ_i · z'_i
+          where φ_i represents the positive or negative risk delta contributed by signal i.
+        </div>
+
+        <h3>4. Defensive Countermeasures & Sybil Mitigation</h3>
+        <p>
+          Based on the analytical scores produced by CyberSentry AI, platforms deploy graduated countermeasures:
+        </p>
+        <ul style="padding-left:1.5rem; line-height:1.8;">
+          <li><strong>Score &lt; 30%:</strong> Verified Authentic. Unrestricted platform access.</li>
+          <li><strong>Score 30% - 65%:</strong> Suspicious. Enforce dynamic proof-of-work, rate limits, and SMS/TOTP step-up verification.</li>
+          <li><strong>Score &gt; 65%:</strong> High Risk. Shadowban feed distribution, trigger CAPTCHA challenges, and submit to human forensic review.</li>
+          <li><strong>Score &gt; 90%:</strong> Malicious Sybil Node. Immediate cryptographic API token revocation and IP cluster quarantine.</li>
+        </ul>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ====================================================================
+       FORENSIC AUDIT REPORT MODAL
+       ==================================================================== -->
+  <div class="modal-overlay" id="reportModalOverlay">
+    <div class="modal-card">
+      <button class="modal-close-btn" id="btnCloseReportModal">&times;</button>
+      
+      <div class="report-header">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.4rem;">
+          <h2 style="font-family:var(--font-main); font-size:1.4rem;">🛡️ Official Forensic Audit Certificate</h2>
+          <span class="verdict-badge badge-danger" id="modalVerdictBadge">High Risk Bot</span>
+        </div>
+        <div style="font-size:0.78rem; color:var(--text-muted);">
+          CyberSentry AI Threat Intelligence & Analytical Verification Engine
+        </div>
+      </div>
+
+      <table class="report-table">
+        <tr>
+          <td style="color:var(--text-muted); width:35%;">Audited Target</td>
+          <td><strong id="modalTargetHandle">@crypto_pump_bot99</strong> (<span id="modalTargetName">ETH Airdrop Claim</span>)</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-muted);">Platform / Channel</td>
+          <td id="modalTargetPlatform">Twitter / X Protocol</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-muted);">Calibrated Bot Probability</td>
+          <td><strong id="modalTargetScore" style="color:var(--accent-crimson); font-size:1.1rem;">97.4%</strong></td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-muted);">Follower Asymmetry</td>
+          <td id="modalFollowersRatio">14 Followers / 4,890 Following</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-muted);">Audit Timestamp</td>
+          <td id="modalAuditTimestamp">2026-10-20 11:05:00 UTC</td>
+        </tr>
+        <tr>
+          <td style="color:var(--text-muted);">Cryptographic Signature Hash</td>
+          <td><div class="report-hash" id="modalCryptoHash">sha256:7f83b1657ff1fc53b92dc18148a1d65dfc2d4b1fa3d677284addd200126d9069</div></td>
+        </tr>
+      </table>
+
+      <div style="margin:1.25rem 0;">
+        <strong style="font-size:0.86rem; color:var(--text-primary); display:block; margin-bottom:0.4rem;">Attribution Evidence Ledger</strong>
+        <div id="modalAttributionEvidence" style="font-size:0.82rem; color:var(--text-secondary); line-height:1.6;">
+          <!-- Dynamically populated -->
+        </div>
+      </div>
+
+      <div style="display:flex; justify-content:flex-end; gap:0.75rem; margin-top:1.5rem;">
+        <button class="btn-secondary" onclick="window.print()">
+          <span>🖨️</span> Print / Save PDF
+        </button>
+        <button class="btn-primary" style="width:auto;" id="btnCloseReport">
+          Done
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

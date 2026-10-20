@@ -1,0 +1,21 @@
+{
+  "name": "fake-social-media-account-detection",
+  "version": "1.0.0",
+  "description": "Analytical and Machine Learning Platform for Automated Detection of Fake Social Media Accounts, Sybil Bots & Astroturfing Networks",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "node test/audit_test.js"
+  },
+  "keywords": [
+    "fake-account-detection",
+    "bot-detection",
+    "social-media-security",
+    "sybil-network-analysis",
+    "machine-learning",
+    "data-analysis",
+    "cyber-threat-intelligence"
+  ],
+  "author": "Mohammed Fardeen Ahmed",
+  "license": "MIT"
+}
